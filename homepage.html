@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fordbook - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+
+        .navbar {
+            background-color: #1877f2;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: #165fba;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #144a9f;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            margin: 50px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-pic {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            color: #1877f2;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+        }
+
+        .profile-actions {
+            margin-top: 10px;
+        }
+
+        .profile-actions button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-actions button:hover {
+            background-color: #165fba;
+        }
+
+        .posts-section, .notes-section {
+            margin: 50px;
+        }
+
+        .posts-section h3, .notes-section h3 {
+            color: #1877f2;
+            margin-bottom: 20px;
+        }
+
+        .post, .note {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .notes-section button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .notes-section button:hover {
+            background-color: #165fba;
+        }
+    </style>
+    <script>
+        // Function to save the note
+        function saveNote() {
+            var note = document.getElementById("noteInput").value;
+            if (note === "") {
+                alert("Note cannot be empty.");
+                return;
+            }
+	    // Save the note to localStorage with the key "savedNote"
+            localStorage.setItem("savedNote", note);
+            alert("Note saved successfully!");
+        }
+
+        // Function to display the saved note
+        function viewNote() {
+            var savedNote = localStorage.getItem("savedNote");
+
+	    // Check if there's a saved note in localStorage
+            if (savedNote) {
+                document.getElementById("savedNoteDisplay").innerText = savedNote;
+            } else {
+                alert("No note saved.");
+            }
+        }
+
+        // Function to clear the saved note
+        function clearNote() {
+	    // Remove the note from localStorage
+            localStorage.removeItem("savedNote");
+
+	    // Clear the displayed note
+            document.getElementById("savedNoteDisplay").innerText = "";
+            alert("Note cleared!");
+        }
+	
+	// Function to automatically load the saved note on page load (optional)
+window.onload = function() {
+    var savedNote = localStorage.getItem("savedNote");
+
+    if (savedNote) {
+        document.getElementById("savedNoteDisplay").innerText = savedNote;
+    }
+};
+    </script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Fordbook</h1>
+        <a href="login.html">Log Out</a> <!-- Link back to the login page -->
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <img src="https://img.freepik.com/premium-vector/anonymous-with-hoodie-illustration-esports-mascot-design-gaming-logo-template_196854-290.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="profile-info">
+            <h2>Master Ford</h2> <!-- Example name -->
+            <p>Email: adminford</p>
+            <p>Member since: January 2024</p>
+            <div class="profile-actions">
+                <button>Edit Profile</button>
+                <button>View Posts</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="posts-section">
+        <h3>Your Posts</h3>
+        <div class="post">
+            <p><strong>Master Ford:</strong> Working as a Master Encoder at Global Language Cebu!</p>
+        </div>
+        <div class="post">
+            <p><strong>Master Ford:</strong> Relaxing while having some flavored beer!</p>
+        </div>
+    </div>
+
+    <!-- Notes Section -->
+    <div class="notes-section">
+        <h3>Your Notes</h3>
+        <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+        <br>
+        <button onclick="saveNote()">Save Note</button>
+        <button onclick="viewNote()">View Note</button>
+        <button onclick="clearNote()">Clear Note</button>
+
+        <h3>Saved Note:</h3>
+        <div class="note" id="savedNoteDisplay"></div> <!-- Where the saved note will be displayed -->
+    </div>
+
+</body>
+</html>
